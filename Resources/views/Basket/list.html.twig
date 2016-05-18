@@ -1,0 +1,50 @@
+{% extends 'NicolasEshopBundle::Layout/front.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row well">
+
+            <h1>E-Shop</h1>
+            <div class="tab-pane fade in active adminTable well" id="articles">
+                <h2>Mon panier</h2>
+                {% if contents %}
+                    <div class="table-responsive">
+                        <table class="table table-hover table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>Supprimer</th>  <!-- Actions column -->
+                                <th>Qte</th>
+                                <th>Ajouter</th>  <!-- Actions column -->
+                                <th></th>  <!-- Actions column -->
+                            </tr>
+                            </thead>
+
+                            {% for content in contents %}
+                                <tr>
+                                    <td>{{ content.product.title }}</td>
+                                    <td>{{ content.product.publishedDate|date("j M Y") }}</td>
+                                    <td><a href="{{ path('nicolas_eshop_basket_delete', { 'slug': content.product.slug }) }}" class="btn btn-info btn-xs">-</a></td>
+                                    <td>{{ content.qte }}</td>
+                                    <td><a href="{{ path('nicolas_eshop_basket_add', { 'slug': content.product.slug }) }}" class="btn btn-info btn-xs">+</a></td>
+                                    <td><a href="{{ path('nicolas_eshop_product_show', { 'slug': content.product.slug }) }}" target="_blank" class="btn btn-info btn-xs">Voir</a></td>
+
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning">No products found.</div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}

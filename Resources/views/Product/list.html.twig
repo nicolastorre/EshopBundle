@@ -1,0 +1,41 @@
+{% extends 'NicolasEshopBundle::Layout/backoffice.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+    <div class="tab-pane fade in active adminTable well" id="articles">
+        <h2>E-shop</h2>
+        {% if products %}
+            <div class="table-responsive">
+                <table class="table table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th></th>  <!-- Actions column -->
+                        <th></th>  <!-- Actions column -->
+                    </tr>
+                    </thead>
+
+                    {% for product in products %}
+                        <tr class="{% if product.published == 0 %}unpublished{% endif %}">
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.publishedDate|date("j M Y") }}</td>
+                            <td><a href="{{ path('nicolas_eshop_product_show', { 'slug': product.slug }) }}" target="_blank" class="btn btn-info btn-xs">Voir</a></td>
+                            <td>
+                                {% include 'NicolasEshopBundle::Partials/Elements/EditDeleteConfirmDialog.html.twig' with {objectName: 'Product', objectId: product.id, editRoute: 'nicolas_eshop_product_edit', deleteRoute: 'nicolas_eshop_product_delete'}  %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-warning">No products found.</div>
+        {% endif %}
+        <a href="{{ path('nicolas_eshop_product_add') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add product</button></a>
+    </div>
+
+
+{% endblock %}

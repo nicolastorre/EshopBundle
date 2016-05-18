@@ -1,0 +1,160 @@
+{% extends 'NicolasEshopBundle::Layout/backoffice.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+
+    <div class="well">
+        <h2 class="text-center">{{ title }}</h2>
+
+        {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+        <div class="form-group">
+            {{ form_label(form.title, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(form.title) }}
+                {{ form_widget(form.title, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.slug, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(form.slug) }}
+                {{ form_widget(form.slug, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.description, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(form.description) }}
+                {{ form_widget(form.description, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.content, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(form.content) }}
+                {{ form_widget(form.content, { 'attr':  {
+                    'class': 'form-control',
+                    'rows': '15'
+                }}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.publishedDate, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-4">
+                {{ form_errors(form.publishedDate) }}
+                <div class="row">
+                    <div class="col-sm-3">
+                    {{ form_widget(form.publishedDate.day, { 'attr':  {'class': 'selectpicker', 'data-width': 'fit'}}) }}
+                    </div>
+                    <div class="col-sm-3">
+                    {{ form_widget(form.publishedDate.month, { 'attr':  {'class': 'selectpicker', 'data-width': 'fit'}}) }}
+                    </div>
+                    <div class="col-sm-3">
+                    {{ form_widget(form.publishedDate.year, { 'attr':  {'class': 'selectpicker', 'data-width': 'fit'}}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.image, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(form.image) }}
+                {{ form_widget(form.image.file) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.published, NULL, { 'label_attr':  {
+                'class': 'col-sm-4 control-label'
+            }}) }}
+            <div class="col-sm-6">
+                {{ form_errors(form.published) }}
+                {{ form_widget(form.published) }}
+                {#{{ form_widget(form.user) }}#}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-3">
+                <input type="submit" class="btn btn-primary" value="Save" formnovalidate="true"/>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+    <script>
+        $('#product_image_file').fileinput({showUpload: false});
+        // $('.selectpicker *').selectpicker();
+        tinymce.init({
+            selector: "#article_content",
+            theme: "modern",
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons template paste textcolor colorpicker textpattern imagetools"
+            ],
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            toolbar2: "print preview media | forecolor backcolor emoticons",
+            image_advtab: true,
+            templates: [
+                {title: 'Test template 1', content: 'Test 1'},
+                {title: 'Test template 2', content: 'Test 2'}
+            ],
+            file_browser_callback: function(field_name, url, type, win) {
+                tinymce.activeEditor.windowManager.open({
+                    title: 'My File Manager',
+                    width: 450,
+                    height: 305,
+                    resizable : "no",
+                    inline : "yes",
+                    close_previous : "no",
+                    buttons: [{
+                        text: 'Insert',
+                        classes: 'widget btn primary first abs-layout-item',
+                        disabled: true,
+                        onclick: 'close',
+                        id: 'insertButton'
+                    }, {
+                        text: 'Close',
+                        onclick: 'close',
+                        window : win,
+                        input : field_name
+                    }]
+                }, {
+                    oninsert: function(url) {
+                        win.document.getElementById(field_name).value = url;
+                    },
+                    onselect: function() {
+                        //
+                    }
+                });
+
+                return false;
+            }
+        });
+
+
+    </script>
+{% endblock %}

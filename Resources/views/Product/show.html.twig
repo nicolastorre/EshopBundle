@@ -1,0 +1,24 @@
+{% extends 'NicolasEshopBundle::Layout/front.html.twig' %}
+
+{% block meta_description %}{{ product.description }}{% endblock %}
+
+{% block title %}{{ product.title }} - E-Shop{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row well">
+                    <h1>{{ product.title }}</h1>
+
+                    <hr>
+                    <img class="img-responsive" src="{{ asset('upload/'~product.image.id~'.'~product.image.url) }}" alt=""> <!--http://placehold.it/900x300-->
+
+                    <hr>
+                    <p class="lead text-justify">{{ product.content | raw }}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

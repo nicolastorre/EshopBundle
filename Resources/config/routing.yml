@@ -1,0 +1,49 @@
+nicolas_eshop:
+    path:     /eshop/
+    defaults: { _controller: NicolasEshopBundle:Product:index }
+
+nicolas_eshop_admin:
+    path:     /ad-eshop/
+    defaults: { _controller: NicolasEshopBundle:Product:list }
+
+nicolas_eshop_homepage:
+    path:     /eshop/product/index/
+    defaults: { _controller: NicolasEshopBundle:Product:index }
+
+nicolas_eshop_product_list:
+    path:  /ad-eshop/product/list/
+    defaults: { _controller: NicolasEshopBundle:Product:list }
+
+nicolas_eshop_product_add:
+    path:  /ad-eshop/product/add/
+    defaults: { _controller: NicolasEshopBundle:Product:add }
+
+nicolas_eshop_product_edit:
+    path:  /ad-eshop/product/edit/{id}
+    defaults: { _controller: NicolasEshopBundle:Product:edit }
+
+nicolas_eshop_product_show:
+    path:  /eshop/show/{slug}
+    defaults: { _controller: NicolasEshopBundle:Product:show }
+    requirements:
+            slug: "[a-zA-Z0-9-_/]+"
+
+nicolas_eshop_product_delete:
+    path:  /ad-eshop/product/delete/
+    defaults: { _controller: NicolasEshopBundle:Product:delete }
+
+nicolas_eshop_basket_list:
+    path:  /eshop/basket/list/
+    defaults: { _controller: NicolasEshopBundle:Basket:list }
+
+nicolas_eshop_basket_add:
+    path:  /basket/add/{slug}
+    defaults: { _controller: NicolasEshopBundle:Basket:add }
+    requirements:
+            slug: "[a-zA-Z0-9-_/]+"
+
+nicolas_eshop_basket_delete:
+    path:  /eshop/basket/delete/{slug}
+    defaults: { _controller: NicolasEshopBundle:Basket:delete }
+    requirements:
+            slug: "[a-zA-Z0-9-_/]+"

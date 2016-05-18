@@ -1,0 +1,4 @@
+services:
+#    nicolas_eshop.example:
+#        class: Nicolas\EshopBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

@@ -1,0 +1,45 @@
+{% extends 'NicolasEshopBundle::Layout/front.html.twig' %}
+
+{% block meta_description %}E-shop{% endblock %}
+
+{% block title %}E-shop{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row well">
+
+            <h1>E-Shop</h1>
+            <h2>{{ total_products }} produits</h2>
+            <div id="product-list" class="col-xs-12 col-sm-8 col-md-8">
+                {% if products %}
+                    <div class="table-responsive">
+                        <table class="table table-hover table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th></th>  <!-- Actions column -->
+                                <th></th>  <!-- Actions column -->
+                            </tr>
+                            </thead>
+                            {% for product in products %}
+                                <tr class="{% if product.published == 0 %}unpublished{% endif %}">
+                                    <td>{{ product.title }}</td>
+                                    <td>{{ product.publishedDate|date("j M Y") }}</td>
+                                    <td>
+                                        <a href="{{ path('nicolas_eshop_product_show', { 'slug': product.slug }) }}" target="_blank" class="btn btn-info btn-xs">Voir</a>
+                                        <a href="{{ path('nicolas_eshop_basket_add', {'slug': product.slug}) }}" class="btn btn-info btn-xs">Ajouter au panier</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning">No products found.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('bundles/nicolasblog/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block jsTop %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+
+{% endblock %}
+
+{% block body %}
+
+    {% include 'NicolasEshopBundle::Partials/Elements/Menu.html.twig' %}
+
+    <div class="wrap">
+        <div id="main" class="main">
+
+            {% if app.request.hasPreviousSession %}
+                {% for type, messages in app.session.flashbag.all() %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    {% include 'NicolasEshopBundle::Partials/Elements/Footer.html.twig' %}
+
+{% endblock %}
